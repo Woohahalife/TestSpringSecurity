@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -16,7 +17,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers("/", "login").permitAll()
+                                .requestMatchers("/", "login", "/join", "/joinProc").permitAll()
                                 .requestMatchers("/admin").hasRole("ADMIN") // 로그인 성공해도 role 해당 안될시 자원을 받지못함
                                 .requestMatchers("/my/**").hasAnyRole("ADMIN", "USER")
                                 .anyRequest().authenticated()
@@ -31,8 +32,12 @@ public class SecurityConfig {
                         .loginProcessingUrl("/loginProc") // 로그인 데이터 처리 url 지정
                         .permitAll()
                 );
-
         return http.build();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 
