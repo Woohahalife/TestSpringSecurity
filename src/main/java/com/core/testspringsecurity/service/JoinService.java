@@ -31,8 +31,7 @@ public class JoinService {
 
         user.setUsername(joinDTO.getUsername());
         user.setPassword(bCryptPasswordEncoder.encode(joinDTO.getPassword())); // 암호 해시화(암호화)
-        user.setRole(Role.ROLE_USER);
-
+        user.setRole(Role.ADMIN);
 
         userRepository.save(user);
 

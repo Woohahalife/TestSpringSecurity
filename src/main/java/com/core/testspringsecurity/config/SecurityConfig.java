@@ -18,7 +18,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         auth -> auth
                                 .requestMatchers("/", "login", "/join", "/joinProc").permitAll()
-                                .requestMatchers("/admin").hasRole("ADMIN") // 로그인 성공해도 role 해당 안될시 자원을 받지못함
+                                .requestMatchers("/admin").hasAnyRole("ADMIN") // 로그인 성공해도 role 해당 안될시 자원을 받지못함
                                 .requestMatchers("/my/**").hasAnyRole("ADMIN", "USER")
                                 .anyRequest().authenticated()
                 );
