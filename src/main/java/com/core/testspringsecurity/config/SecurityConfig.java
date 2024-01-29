@@ -23,9 +23,12 @@ public class SecurityConfig {
                                 .anyRequest().authenticated()
                 );
 
-        http// csrf보호 비활성화 : 로그인 시 csrf도 같이 보내줘야 하지만 개발환경에서는 불편하기에 일단 비활성화함
+//        http// csrf보호 비활성화 : 로그인 시 csrf처리 후 관련 토큰도 같이 보내줘야 하지만 개발환경에서는 불편하기에 일단 비활성화함
+//
+//                .csrf(auth -> auth.disable());
 
-                .csrf(auth -> auth.disable());
+        // 앱에서 사용하는 API 서버의 경우 보통 세션을 STATELESS로 관리하기 때문에
+        // 스프링 시큐리티 csrf enable 설정을 진행하지 않아도 된다.
 
         http // 로그인 폼 관련 설정(커스텀 로그인)
                 .formLogin(

@@ -13,6 +13,7 @@
   <input id="username" type="text" name="username" placeholder="id"/>
   <label for="password"></label>
   <input id="password" type="password" name="password" placeholder="password"/>
+  <input type="hidden" name="_csrf" value="{{_csrf.token}}"/> <!-- csrf토큰 전송 -->
   <input type="submit" value="login"/>
 </form>
 </body>
